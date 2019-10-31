@@ -17,15 +17,15 @@ int lista_vazia(t_lista *l)
 	 return 1;
  return 0;
 }
-
+/*
 int destroi_lista(t_lista *l)
 {
 
 }
-
+*/
 int insere_inicio_lista(int item, t_lista *l)
 {
- t_nodo *new_node;
+ t_nodo *new_nodo;
 
  new_nodo = (t_nodo*) malloc(sizeof(t_nodo));
  if ( ! new_nodo )
@@ -43,7 +43,7 @@ int insere_inicio_lista(int item, t_lista *l)
 
 int tamanho_lista(int *tam, t_lista *l)
 {
- if ( *tam = l->tamanho )
+ if ( (*tam = l->tamanho) )
 	 return 1;
  return 0;
 }
@@ -72,13 +72,13 @@ int insere_fim_lista(int item, t_lista *l)
 
  return 1;
 }
-
+/*
 int insere_ordenado_lista(int item, t_lista *l)
 {
  
 
 }
-
+*/
 int remove_inicio_lista(int *item, t_lista *l)
 {
  if ( lista_vazia(l) )
@@ -127,7 +127,7 @@ int remove_item_lista(int chave, int *item, t_lista *l)
 
  while ( l->atual != l->fim )
  {
-	 if ( l->atual == chave )
+	 if ( l->atual->chave == chave )
 	 {
 		*item = l->atual->chave;
 		l->atual->prev->prox = l->atual->prox;
@@ -184,12 +184,12 @@ void decrementa_atual(t_lista *l)
  else
 	 l->atual = NULL;
 }
-
+/*
 int consulta_item_atual(int *item, t_lista *atual)
 {
 
 }
-
+*/
 int remove_item_atual(int *item, t_lista *l)
 {
  if ( lista_vazia(l) )
