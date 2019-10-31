@@ -4,9 +4,8 @@
 
 int inicializa_lista(t_lista *l)
 {
- l->ini = NULL;
- l->atual = NULL;
- l->fim = NULL;
+ l->ini = l->atual = l->fim = NULL;
+ l->tamanho = 0;
 
  return 1;
 }
