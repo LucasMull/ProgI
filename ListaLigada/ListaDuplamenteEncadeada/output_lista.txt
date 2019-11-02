@@ -1,0 +1,56 @@
+lista l é: 
+Teste de insercao no inicio com lista l: 
+lista l é: tam: 6 -> 10 8 6 4 2 0
+Teste de insercao no fim com lista m: 
+lista m é: tam: 6 -> 0 2 4 6 8 10
+Teste de copia de lista copiando m em p: 
+lista p é: tam: 6 -> 0 2 4 6 8 10
+Teste de insercao ordenada com lista o: 
+lista o é: tam: 7 -> -1 0 3 4 7 11 18
+Testando ordenação com lista l: 
+lista l é: tam: 6 -> 0 2 4 6 8 10
+Testando intercalacao com lista o e p na lista q
+lista q é: tam: 13 -> -1 0 0 2 3 4 4 6 7 8 10 11 18
+Teste de remocao no inicio com lista l: 
+Removeu 0
+Lista l é: tam: 5 -> 2 4 6 8 10
+Removeu 2
+Lista l é: tam: 4 -> 4 6 8 10
+Removeu 4
+Lista l é: tam: 3 -> 6 8 10
+Removeu 6
+Lista l é: tam: 2 -> 8 10
+Removeu 8
+Lista l é: tam: 1 -> 10
+Removeu 10
+Lista l é: 
+Teste de remocao no fim com lista m: 
+Removeu 10
+Lista m é: tam: 5 -> 0 2 4 6 8
+Removeu 8
+Lista m é: tam: 4 -> 0 2 4 6
+Removeu 6
+Lista m é: tam: 3 -> 0 2 4
+Removeu 4
+Lista m é: tam: 2 -> 0 2
+Removeu 2
+Lista m é: tam: 1 -> 0
+Removeu 0
+Lista m é: 
+Teste de remocao especifica com lista o: 
+Removeu 11
+Removeu -1
+Nao achou 20
+lista o é: tam: 5 -> 0 3 4 7 18
+Teste de pertencer com lista o: 
+4 pertence a lista o
+-1 não pertence a lista o
+18 pertence a lista o
+30 não pertence a lista o
+concatenando lista p na lista o
+lista o é: tam: 11 -> 0 3 4 7 18 0 2 4 6 8 10
+Teste de destruicao das listas: 
+Destruindo lista l...
+Destruindo lista m...
+Destruindo lista o...
+Destruindo lista q...
