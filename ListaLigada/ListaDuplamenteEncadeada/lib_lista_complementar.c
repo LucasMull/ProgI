@@ -44,9 +44,12 @@ int concatena_listas(t_lista *l, t_lista *m)
  
  inicializa_atual_fim(l);
  inicializa_atual_inicio(m);
-
  l->atual->prox = m->atual;
- l->fim = m->fim;
+ 
+ inicializa_atual_fim(m);
+ m->atual->prox = l->fim;
+ l->fim->prev = m->atual;
+
  l->tamanho += m->tamanho;
 
  free(m->ini);
@@ -60,20 +63,21 @@ int concatena_listas(t_lista *l, t_lista *m)
 int ordena_lista(t_lista *l)
 {
  int *ordena;
- int i, chave, j;
+ int i, j, tam, chave;
 
  if ( lista_vazia(l) )
 	 return 0;
  
- ordena = (int*)malloc(sizeof(int)*(l->tamanho));
- l->atual = l->ini;
- for ( i=0; i < l->tamanho; i++ )
+ tamanho_lista(&tam, l);
+ ordena = (int*)malloc(tam*sizeof(int));
+ inicializa_atual_inicio(l);
+ for ( i=0; i < tam; i++ ) /*preenche ordena com elementos do vetor*/
  {
 	ordena[i] = l->atual->chave;
 	incrementa_atual(l);
  }
  
- for (i = 1; i < l->tamanho; i++)
+ for (i = 1; i < tam; i++)
  {
 	 chave = ordena[i];
 	 j = i-1;
@@ -86,8 +90,8 @@ int ordena_lista(t_lista *l)
 	 ordena[j+1]=chave;
  }
  
- l->atual = l->ini;
- for ( i=0; i < l->tamanho; i++ )
+ inicializa_atual_inicio(l);
+ for ( i=0; i < tam; i++ )
  {
 	l->atual->chave = ordena[i];
 	incrementa_atual(l);	
@@ -101,8 +105,8 @@ int ordena_lista(t_lista *l)
 int intercala_listas(t_lista *l, t_lista *m, t_lista *i)
 {
  int j, tam_l, tam_m, tam_i;
+ int item_l, item_m;
   
- inicializa_lista(i);
  if ( lista_vazia(l) && lista_vazia(m) )
 	 return 0;
  else if ( lista_vazia(l) )
@@ -119,12 +123,17 @@ int intercala_listas(t_lista *l, t_lista *m, t_lista *i)
  tam_i = tam_l + tam_m;
  for ( j=0; j < tam_i; j++ )
  {
+	if ( l->atual != l->fim )
+		consulta_item_atual(&item_l, l);
+	if ( m->atual != m->fim )
+		consulta_item_atual(&item_m, m);
+
 	if (( j%2==0 ) && ( l->atual != l->fim))
 	{
 		insere_fim_lista(l->atual->chave, i);
 		incrementa_atual(l);
 	}
-	else if ( m->atual != m->fim )
+	else if (( item_m <= item_l ) && ( m->atual != m->fim ))
 	{
 		insere_fim_lista(m->atual->chave, i);
 		incrementa_atual(m);

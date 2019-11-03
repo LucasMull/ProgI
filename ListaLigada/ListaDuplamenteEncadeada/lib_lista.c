@@ -33,21 +33,29 @@ int lista_vazia(t_lista *l)
  return 0;
 }
 
-void destroi_lista(t_lista *l)
-{
- int tam;
- int i, temp;
+void destroi_lista(t_lista *l){
+	t_nodo *aux;
 
- tamanho_lista(&tam, l);
- for ( i=0; i<tam; i++ )
-	remove_fim_lista(&temp, l);
- 
- free(l->ini);
- free(l->atual);
- free(l->fim);
- l->ini = NULL; 
- l->atual = NULL; 
- l->fim = NULL; 
+	if(l->tamanho > 0){
+		l->atual = l->ini->prox;
+		while(l->atual->prox != NULL){
+			aux = l->atual->prox;
+			aux->prev->prev = NULL;
+			aux->prev->prox = NULL;
+			free(l->atual);
+			l->atual = aux;
+		}
+		aux = NULL;
+	}
+
+	l->ini->prox = NULL;
+	l->fim->prev = NULL;
+	free(l->fim);
+	free(l->ini);
+	l->ini = NULL;
+	l->atual = NULL;
+	l->fim = NULL;
+	l->tamanho = 0;
 }
 
 int insere_inicio_lista(int item, t_lista *l)
@@ -97,15 +105,13 @@ int insere_fim_lista(int item, t_lista *l)
 int insere_ordenado_lista(int item, t_lista *l)
 {
  t_nodo *new_nodo;
-
+ 
  if ( lista_vazia(l) )
-	return ( insere_inicio_lista(item, l) );
-
+	return (insere_inicio_lista(item, l));
+ 
+ l->fim->chave = item; /*sentinela*/
  inicializa_atual_inicio(l);
- if ( l->atual->chave >= item )
-	 return ( insere_inicio_lista(item, l) );
-
- while (( l->atual != l->fim ) && ( l->atual->chave <= item ))
+ while ( l->atual->chave < item )
 	incrementa_atual(l);
 
  if ( l->atual == l->fim )
@@ -115,12 +121,12 @@ int insere_ordenado_lista(int item, t_lista *l)
  if ( new_nodo == NULL )
  	return 0;
 
- new_nodo->prox = l->atual->prev->prox;
- new_nodo->prev = l->atual->prev;
- l->atual->prev->prox = new_nodo;
- l->atual->prox->prev = new_nodo;
- 
  new_nodo->chave = item;
+ new_nodo->prox = l->atual;
+ new_nodo->prev = l->atual->prev;
+ new_nodo->prev->prox = new_nodo;
+ new_nodo->prox->prev = new_nodo;
+ 
  l->tamanho++;
 
  return 1;
@@ -242,7 +248,7 @@ void decrementa_atual(t_lista *l)
 
 int consulta_item_atual(int *item, t_lista *atual)
 {
- if ( ! atual )
+ if ( atual->atual == NULL )
 	 return 0;
 
  *item = atual->atual->chave;
