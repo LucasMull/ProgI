@@ -128,15 +128,25 @@ int intercala_listas(t_lista *l, t_lista *m, t_lista *i)
 	if ( m->atual != m->fim )
 		consulta_item_atual(&item_m, m);
 
-	if (( j%2==0 ) && ( l->atual != l->fim))
+	if (( item_l <= item_m ) && ( l->atual != l->fim ))
 	{
 		insere_fim_lista(l->atual->chave, i);
 		incrementa_atual(l);
+		if ( m->atual != m->fim )
+		{
+			insere_fim_lista(m->atual->chave, i);
+			incrementa_atual(m);
+		}
 	}
-	else if (( item_m <= item_l ) && ( m->atual != m->fim ))
+	else if ( m->atual != m->fim )
 	{
 		insere_fim_lista(m->atual->chave, i);
 		incrementa_atual(m);
+		if ( l->atual != l->fim )
+		{
+			insere_fim_lista(l->atual->chave, i);
+			incrementa_atual(l);
+		}
 	}
  }
 
