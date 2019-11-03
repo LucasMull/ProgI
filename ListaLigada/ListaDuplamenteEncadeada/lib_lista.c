@@ -257,19 +257,14 @@ int consulta_item_atual(int *item, t_lista *atual)
 
 int remove_item_atual(int *item, t_lista *l)
 {
- if ( lista_vazia(l) )
+ if ( lista_vazia(l) || l->atual == NULL )
 	 return 0;
  
- if ( l->atual != l->ini )
- 	l->atual->prev->prox = l->atual->prox;
- else
-	 l->ini = l->atual->prox;
+ l->atual->prev->prox = l->atual->prox;
+ l->atual->prox->prev = l->atual->prev;
 
- if ( l->atual != l->fim )
- 	l->atual->prox->prev = l->atual->prev;
- else
-	 l->fim = l->atual->prev;
- 
+ free(l->atual);
+ l->atual = NULL;
  l->tamanho--;
 
  return 1;

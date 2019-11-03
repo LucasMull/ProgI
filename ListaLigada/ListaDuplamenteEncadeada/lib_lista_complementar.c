@@ -82,7 +82,7 @@ int ordena_lista(t_lista *l)
 	 chave = ordena[i];
 	 j = i-1;
 	 
-	 while (j >= 0 && ordena[j] > chave)
+	 while (j >= 0 && ordena[j] > chave) /*quick sort dos elementos*/
 	 {
 		 ordena[j+1] = ordena[j];
 		 j--;
