@@ -10,6 +10,7 @@ int inicializa_lista(t_lista *l)
  if ( first == NULL || last == NULL )
  {
 	 free(first);
+	 free(last);
 	 return 0;
  }
 
@@ -38,13 +39,14 @@ void destroi_lista(t_lista *l){
 
 	if(l->tamanho > 0){
 		l->atual = l->ini->prox;
-		while(l->atual->prox != NULL){
+		while(l->atual != l->fim){
 			aux = l->atual->prox;
 			aux->prev->prev = NULL;
 			aux->prev->prox = NULL;
 			free(l->atual);
 			l->atual = aux;
 		}
+		free(aux);
 		aux = NULL;
 	}
 

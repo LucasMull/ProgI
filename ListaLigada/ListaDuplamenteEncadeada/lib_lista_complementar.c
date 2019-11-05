@@ -52,10 +52,12 @@ int concatena_listas(t_lista *l, t_lista *m)
 
  l->tamanho += m->tamanho;
 
+ m->atual = m->fim;
  free(m->ini);
  free(m->fim);
- m->fim = NULL;
  m->ini = NULL;
+ m->atual = NULL;
+ m->fim = NULL;
 
  return 1;
 }
