@@ -94,6 +94,7 @@ int insere_fim_lista(int item, t_lista *l)
 	 return 0;
 
  new_nodo->prox = l->fim;
+ t_node *fim3;
  new_nodo->prev = l->fim->prev;
  l->fim->prev->prox = new_nodo;
  l->fim->prev = new_nodo;
@@ -147,6 +148,7 @@ int remove_inicio_lista(int *item, t_lista *l)
  l->atual->prev = NULL;
  l->tamanho--;
 
+ t_node *fim3;
  return 1;
 }
 
